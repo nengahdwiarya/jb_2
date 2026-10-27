@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#173f35">
+  <title>JB Kuliner | Rasa Nusantara</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <a href="#" class="brand">
+      <span class="brand-main">JB</span>
+      <span class="brand-sub">KULINER</span>
+    </a>
+    <button class="cart-button" id="cart-button">
+      🛒 Keranjang <span id="cart-count">0</span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <span class="eyebrow">RASA NUSANTARA, CERITA KITA</span>
+        <h1>Temukan rasa,<br><span>nikmati ceritanya.</span></h1>
+        <p>Dari dapur Jawa sampai Bali, selalu ada rasa yang bikin ingin kembali.</p>
+        <a class="hero-button" href="#menu">Jelajahi Menu <span>↓</span></a>
+      </div>
+      <div class="hero-art">
+        <img
+          src="https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=900&q=85"
+          alt="Hidangan nasi khas Nusantara">
+        <div class="art-label">Dibuat dengan rasa ❤️</div>
+      </div>
+    </section>
+
+    <section class="menu-section" id="menu">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">PILIHAN UNTUKMU</span>
+          <h2>Menu JB Kuliner</h2>
+          <p>Cari makanan favoritmu di sini.</p>
+        </div>
+        <span class="menu-total" id="menu-total">18 menu tersedia</span>
+      </div>
+
+      <div class="search-box">
+        <span>⌕</span>
+        <input id="search-input" type="search" placeholder="Cari menu..." autocomplete="off">
+      </div>
+
+      <div class="categories" id="categories">
+        <button class="category active" data-category="Semua">Semua</button>
+        <button class="category" data-category="Makanan">Makanan</button>
+        <button class="category" data-category="Camilan">Camilan</button>
+        <button class="category" data-category="Minuman">Minuman</button>
+        <button class="category" data-category="Khas Bali">Khas Bali</button>
+        <button class="category" data-category="Khas Jawa">Khas Jawa</button>
+      </div>
+
+      <div class="menu-grid" id="menu-grid"></div>
+    </section>
+
+    <section class="reservation-section" id="reservasi">
+      <div class="reservation-info">
+        <span class="eyebrow">MAKAN LEBIH NYAMAN</span>
+        <h2>Rencanakan<br>momenmu.</h2>
+        <p>Isi detail reservasi dan siapkan meja untuk pengalaman kuliner berikutnya.</p>
+        <div class="reservation-note">✦ Reservasi dikirim melalui WhatsApp</div>
+      </div>
+
+      <form id="reservation-form" class="reservation-form">
+        <label for="customer-name">Nama pemesan</label>
+        <input id="customer-name" name="name" type="text" placeholder="Nama lengkap" required>
+
+        <div class="form-row">
+          <div>
+            <label for="guest-count">Jumlah orang</label>
+            <select id="guest-count" name="guests" required>
+              <option value="1">1 orang</option>
+              <option value="2" selected>2 orang</option>
+              <option value="3">3 orang</option>
+              <option value="4">4 orang</option>
+              <option value="5">5 orang</option>
+              <option value="6">6 orang</option>
+              <option value="7">7 orang</option>
+              <option value="8">8 orang</option>
+            </select>
+          </div>
+          <div>
+            <label for="table-type">Pilihan meja</label>
+            <select id="table-type" name="table" required>
+              <option value="Indoor">Indoor</option>
+              <option value="Outdoor">Outdoor</option>
+              <option value="Bebas">Bebas</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div>
+            <label for="reservation-date">Tanggal</label>
+            <input id="reservation-date" name="date" type="date" required>
+          </div>
+          <div>
+            <label for="reservation-time">Jam</label>
+            <input id="reservation-time" name="time" type="time" required>
+          </div>
+        </div>
+
+        <label for="reservation-note">Catatan (opsional)</label>
+        <textarea id="reservation-note" name="note" rows="3" placeholder="Contoh: dekat jendela"></textarea>
+
+        <button type="submit" class="submit-button">Pesan Meja via WhatsApp ↗</button>
+        <p class="form-hint">Konfirmasi akhir dilakukan oleh pihak restoran.</p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <a href="#" class="brand footer-brand">
+      <span class="brand-main">JB</span>
+      <span class="brand-sub">KULINER</span>
+    </a>
+    <p>Rasa Nusantara, dekat di hati.</p>
+    <span>© <span id="year"></span> JB Kuliner</span>
+  </footer>
+
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <aside class="cart-panel" id="cart-panel" aria-label="Keranjang belanja">
+    <div class="cart-header">
+      <div>
+        <span class="eyebrow">PESANANMU</span>
+        <h2>Keranjang</h2>
+      </div>
+      <button class="close-cart" id="close-cart" aria-label="Tutup keranjang">×</button>
+    </div>
+    <div id="cart-items" class="cart-items"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total</span>
+        <strong id="cart-total">Rp 0</strong>
+      </div>
+      <button class="submit-button" id="checkout-button">Pesan via WhatsApp ↗</button>
+      <p class="form-hint">Pesanan belum dikirim sebelum kamu menekan tombol pesan.</p>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
