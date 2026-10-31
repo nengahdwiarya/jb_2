@@ -1,382 +1,922 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JB Kuliner | Rasa Jawa & Bali</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#211710">
+<title>Kopi P,L,M | Coffee & Eatery</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#f7f7f5;color:#252525;line-height:1.6}
-header{background:#252c27;color:white;padding:18px 6%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.logo{font-size:25px;font-weight:bold;color:#e8c78a}
-nav a{color:white;text-decoration:none;margin-left:12px;font-size:14px}
-.hero{background:#35443a;color:white;padding:65px 7%;text-align:center}
-.hero h1{font-size:clamp(30px,6vw,48px);margin-bottom:12px}
-.hero p{max-width:600px;margin:0 auto 22px;color:#e5e5df}
-.btn{display:inline-block;border:0;border-radius:7px;background:#d6b477;color:#252525;padding:11px 17px;font-weight:bold;text-decoration:none;cursor:pointer}
-section{padding:38px 6%}
-.section-title{font-size:27px;margin-bottom:8px}
-.muted{color:#777;margin-bottom:20px}
-.filters{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:18px}
-.filter-btn{border:1px solid #d5d5d0;padding:9px 15px;border-radius:20px;background:white;cursor:pointer}
-.filter-btn.active{background:#35443a;color:white}
-.search{width:100%;max-width:430px;padding:12px;border:1px solid #ddd;border-radius:8px;margin-bottom:22px;font-size:15px}
-.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.menu-card{background:white;border-radius:12px;overflow:hidden;border:1px solid #e9e9e5;box-shadow:0 3px 12px #00000008}
-.menu-card img{display:block;width:100%;height:165px;object-fit:cover;background:#e5e5df}
-.menu-info{padding:16px}
-.category{font-size:12px;color:#637267;text-transform:uppercase;font-weight:bold}
-.menu-info h3{margin:5px 0}
-.description{font-size:13px;color:#777;min-height:40px}
-.price{color:#35443a;font-weight:bold;font-size:18px;margin:12px 0}
-.menu-info .btn{width:100%}
-.empty{padding:25px;background:white;border-radius:8px;color:#777;grid-column:1/-1}
-.two-columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:25px}
-.panel{background:white;border:1px solid #e8e8e4;border-radius:12px;padding:22px}
-.panel h3{margin-bottom:15px}
-.field{margin-bottom:13px}
-.field label{display:block;font-size:14px;margin-bottom:5px;font-weight:bold}
-.field input,.field select,.field textarea{width:100%;padding:11px;border:1px solid #ddd;border-radius:7px;font:inherit}
-.field textarea{resize:vertical;min-height:75px}
-.panel .btn{width:100%}
-.cart-item{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #eee}
-.cart-item small{display:block;color:#777}
-.quantity{display:flex;align-items:center;gap:8px;margin-top:6px}
-.quantity button,.remove-btn{border:1px solid #ddd;background:#f7f7f5;border-radius:5px;padding:3px 9px;cursor:pointer}
-.remove-btn{color:#a22}
-.cart-total{display:flex;justify-content:space-between;font-size:18px;font-weight:bold;padding:17px 0}
-.cart-actions{display:flex;gap:8px}
-.cart-actions button{flex:1}
-footer{background:#252c27;color:#ddd;text-align:center;padding:25px 15px;font-size:13px}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#252c27;color:white;padding:12px 20px;border-radius:8px;display:none;z-index:99;max-width:90%;text-align:center}
-.toast.show{display:block}
-@media(max-width:500px){header{justify-content:center;text-align:center}nav a{margin:0 5px}.hero{padding:45px 6%}}
+:root{--brown:#38251d;--dark:#211710;--gold:#c69a60;--cream:#f8f3eb;--white:#fff;--text:#40332c;--muted:#897c71;--line:#e9ded1;--shadow:0 12px 35px #21171012}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--text);font-family:"DM Sans",sans-serif;line-height:1.6}a{text-decoration:none;color:inherit}button,input,select,textarea{font:inherit}button{cursor:pointer}.container{width:min(1120px,90%);margin:auto}
+.announcement{text-align:center;background:var(--dark);color:#ead5b5;padding:8px;font-size:12px}
+.header{position:sticky;top:0;z-index:20;background:#f8f3ebf5;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.navbar{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;font-family:"Playfair Display",serif;font-size:22px;font-weight:700;color:var(--brown)}
+.brand b{color:var(--gold)}.brand small{display:block;font:700 9px "DM Sans";letter-spacing:3px;color:var(--muted)}
+.brand-icon{width:37px;height:37px;border-radius:50%;background:var(--brown);color:var(--gold);display:grid;place-items:center}
+.nav{display:flex;align-items:center;gap:22px}.nav a{font-size:13px;font-weight:700}.nav a:hover{color:var(--gold)}
+.menu-toggle{display:none;border:0;background:none;font-size:25px;color:var(--brown)}
+.btn,.cart-button{border:0;border-radius:30px;padding:12px 19px;font-size:13px;font-weight:800;display:inline-flex;justify-content:center;align-items:center;gap:7px}
+.btn-gold{background:var(--gold);color:var(--dark)}.btn-gold:hover{background:#d6ad79}
+.btn-outline{background:transparent;border:1px solid var(--gold);color:var(--brown)}
+.cart-button{background:var(--brown);color:white}
+.hero{min-height:600px;background:linear-gradient(90deg,#211710e8,#21171052),url("https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=1800") center/cover;display:flex;align-items:center;color:white}
+.hero-content{width:min(1120px,90%);margin:auto;padding:90px 0}.eyebrow{color:var(--gold);font-size:11px;font-weight:800;letter-spacing:3px}
+h1,h2,h3{font-family:"Playfair Display",serif;color:var(--brown);line-height:1.2}
+.hero h1{font-size:clamp(45px,8vw,82px);color:white;margin:15px 0}.hero h1 span,h2 span{color:var(--gold)}
+.hero-content>p{max-width:520px;color:#eee0d3}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.hero-info{display:flex;gap:30px;margin-top:35px}.hero-info div{display:grid}.hero-info small{color:#e2d3c6}
+.benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:25px 5%;background:white}
+.benefits>div{display:flex;align-items:center;gap:12px}.benefits span{display:grid}.benefits small{font-size:11px;color:var(--muted)}
+.section{padding:80px 0}.section-heading{text-align:center;max-width:680px;margin:0 auto 35px}
+.section-heading h2{font-size:clamp(30px,5vw,43px);margin:10px 0}.section-heading p{color:var(--muted)}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center}
+.about-image img{width:100%;height:390px;object-fit:cover;border-radius:16px}
+.about-content p{color:var(--muted);line-height:1.9}.text-link{color:var(--brown);font-weight:800}
+.menu-section{background:#eee5d9}.menu-tools{display:flex;gap:12px;margin-bottom:20px}
+.menu-tools input,.menu-tools select{padding:13px;border:1px solid var(--line);border-radius:9px;background:white;min-width:0}
+.menu-tools input{flex:1}.category-list{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:25px}
+.category{padding:9px 17px;border-radius:25px;border:1px solid var(--line);background:white;color:var(--brown);font-size:12px;font-weight:700}
+.category.active,.category:hover{background:var(--brown);color:white}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.menu-card{background:white;border-radius:15px;overflow:hidden;box-shadow:var(--shadow)}
+.menu-card img{width:100%;height:190px;object-fit:cover}.menu-body{padding:16px}
+.menu-body h3{font-size:17px;margin:0}.menu-body p{font-size:12px;color:var(--muted);min-height:38px}
+.menu-meta{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.price{font-weight:800;color:var(--brown)}.pill{background:#f3e8d9;color:var(--brown);border-radius:20px;padding:4px 9px;font-size:10px}
+.menu-card .btn{width:100%;margin-top:12px}.promo{background:var(--brown);color:white;padding:45px 8%;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.promo h2{color:white;font-size:34px;margin:8px 0}.promo p{color:#e4d5c8}
+.form-card{max-width:680px;margin:auto;background:white;padding:25px;border-radius:16px;box-shadow:var(--shadow);display:grid;gap:15px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+label{display:grid;gap:7px;font-size:12px;font-weight:700}
+input,select,textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--text)}
+textarea{resize:vertical}.full-width{width:100%}.form-note{font-size:11px;color:var(--muted)}
+.tracking-section{background:#eee5d9}.tracking-form{display:flex;gap:10px;max-width:580px;margin:auto}
+.tracking-form input{flex:1;min-width:0;border-radius:30px;padding:13px 18px}
+.tracking-result{max-width:580px;margin:18px auto;text-align:center}.result-box{background:white;padding:18px;border-radius:12px}
+.review-section{background:var(--cream)}.admin-section{background:#eee5d9}.admin-panel{max-width:900px;margin:auto}
+.admin-top{display:flex;justify-content:space-between;align-items:center}
+.admin-list{background:white;padding:15px;border-radius:12px;margin-bottom:25px;overflow:auto}
+.admin-row{padding:12px 0;border-bottom:1px solid var(--line);font-size:13px}
+.admin-row button,.admin-row select{margin:5px;padding:7px}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}
+.stat{background:white;border-radius:12px;padding:18px}.stat strong{display:block;font-size:22px;color:var(--brown)}
+.footer{background:var(--dark);color:white;padding:45px 5% 20px}
+.footer-main{max-width:1120px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}
+.footer h3{color:var(--gold)}.footer-main>div>a:not(.brand){display:block;color:#ddd0c4;font-size:13px;margin:8px 0}
+.footer p{color:#cbbcaf;font-size:13px}
+.footer-bottom{max-width:1120px;margin:30px auto 0;padding-top:15px;border-top:1px solid #ffffff25;display:flex;justify-content:space-between;gap:15px;font-size:11px;color:#cbbcaf}
+.overlay{position:fixed;inset:0;background:#0008;z-index:40;display:none}.overlay.show{display:block}
+.cart-drawer{position:fixed;right:-450px;top:0;width:min(420px,100%);height:100vh;background:white;z-index:50;padding:20px;overflow:auto;transition:.25s;display:flex;flex-direction:column;gap:15px}
+.cart-drawer.open{right:0}.cart-header{display:flex;justify-content:space-between;align-items:center}
+.cart-header h2{font-size:25px}.icon-button{border:0;background:none;font-size:22px}
+.cart-items{flex:1}.cart-line{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.cart-line small{display:block;color:var(--muted)}.qty{display:flex;align-items:center;gap:7px}
+.qty button{border:0;border-radius:50%;background:#f3e8d9;width:27px;height:27px}
+.voucher-row{display:flex;gap:8px}.cart-summary{border-top:1px solid var(--line);padding-top:12px}
+.cart-summary p{display:flex;justify-content:space-between;margin:8px 0}.cart-total{font-size:19px;color:var(--brown)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--brown);color:white;padding:12px 20px;border-radius:30px;z-index:90;display:none;max-width:90%;text-align:center}
+.toast.show{display:block}[hidden]{display:none!important}
+@media(max-width:800px){.nav{gap:10px}.nav a{font-size:11px}.menu-grid{grid-template-columns:repeat(2,1fr)}.benefits{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){
+.navbar{min-height:68px}.menu-toggle{display:block}
+.nav{display:none;position:absolute;top:68px;left:0;right:0;background:var(--cream);padding:20px 5%;flex-direction:column;align-items:flex-start}
+.nav.open{display:flex}.nav a{font-size:14px}.brand{font-size:19px}
+.cart-button{padding:9px 12px;font-size:11px}.hero{min-height:570px}.hero-content{padding:65px 0}
+.hero h1{font-size:49px}.benefits{gap:15px;padding:20px 5%}.benefits>div{font-size:13px}
+.section{padding:55px 0}.about{grid-template-columns:1fr;gap:25px}.about-image img{height:250px}
+.menu-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.menu-card img{height:125px}.menu-body{padding:11px}.menu-body h3{font-size:13px}.menu-body p{font-size:11px}
+.menu-tools{flex-direction:column}.promo{flex-direction:column;align-items:flex-start;padding:35px 6%}
+.form-grid{grid-template-columns:1fr}.tracking-form{flex-direction:column}
+.stats-grid{grid-template-columns:1fr 1fr}.footer-main{grid-template-columns:1fr}.footer-bottom{flex-wrap:wrap}
+}
+@media(max-width:360px){.menu-grid{grid-template-columns:1fr}.menu-card img{height:180px}}
 </style>
 </head>
-
 <body>
-<header>
-  <div class="logo">JB KULINER</div>
-  <nav>
-    <a href="#beranda">Beranda</a>
-    <a href="#menu">Menu</a>
-    <a href="#reservasi">Reservasi</a>
-    <a href="#keranjang">Keranjang <span id="cart-count">0</span></a>
-  </nav>
+<div class="announcement">☕ Kopi enak, makanan hangat, suasana nyaman.</div>
+<header class="header">
+<div class="container navbar">
+<a href="#home" class="brand"><span class="brand-icon">P</span><span>Kopi <b>P,L,M</b><small>COFFEE & EATERY</small></span></a>
+<button class="menu-toggle" id="menuToggle">☰</button>
+<nav class="nav" id="nav">
+<a href="#home">Beranda</a><a href="#about">Tentang</a><a href="#menu">Menu</a><a href="#reservation">Reservasi</a><a href="#tracking">Lacak Pesanan</a>
+</nav>
+<button class="cart-button" id="openCart">🛒 Keranjang <span id="cartCount">0</span></button>
+</div>
 </header>
-
 <main>
-<section class="hero" id="beranda">
-  <h1>Cita Rasa Jawa & Bali</h1>
-  <p>Nikmati hidangan khas Nusantara dengan cita rasa autentik, bahan pilihan, dan suasana nyaman.</p>
-  <a class="btn" href="#menu">Lihat Menu</a>
+<section class="hero" id="home">
+<div class="hero-content">
+<span class="eyebrow">YOUR DAILY COFFEE SPOT</span>
+<h1>Secangkir kopi,<br><span>sejuta cerita.</span></h1>
+<p>Temukan kopi favorit, makanan lezat, dan tempat nyaman untuk menikmati setiap momen bersama Kopi P,L,M.</p>
+<div class="hero-actions"><a href="#menu" class="btn btn-gold">Jelajahi Menu ↗</a><a href="#about" class="btn btn-outline" style="color:white">Tentang Kami</a></div>
+<div class="hero-info"><div><strong>☕ Fresh</strong><small>Diracik saat dipesan</small></div><div><strong>🍽️ Beragam</strong><small>Kopi dan makanan</small></div></div>
+</div>
 </section>
-
-<section id="menu">
-  <h2 class="section-title">Menu Pilihan</h2>
-  <p class="muted">Pilih hidangan favoritmu dan tambahkan ke keranjang.</p>
-  <input class="search" id="search-input" type="search" placeholder="Cari makanan atau minuman...">
-
-  <div class="filters">
-    <button class="filter-btn category active" data-category="Semua">Semua</button>
-    <button class="filter-btn category" data-category="Khas Jawa">Khas Jawa</button>
-    <button class="filter-btn category" data-category="Khas Bali">Khas Bali</button>
-    <button class="filter-btn category" data-category="Camilan">Camilan</button>
-    <button class="filter-btn category" data-category="Minuman">Minuman</button>
-  </div>
-
-  <p id="menu-total" class="muted">Memuat menu...</p>
-  <div class="menu-grid" id="menu-grid">
-    <p class="empty">Memuat menu...</p>
-  </div>
+<section class="benefits">
+<div>☕ <span><b>Freshly Brewed</b><small>Kopi diracik segar</small></span></div>
+<div>🥘 <span><b>Fresh Food</b><small>Menu untuk setiap selera</small></span></div>
+<div>🤎 <span><b>Cozy Place</b><small>Nyaman untuk berkumpul</small></span></div>
+<div>✨ <span><b>Good Moments</b><small>Ciptakan cerita baru</small></span></div>
 </section>
-
-<section id="keranjang">
-  <h2 class="section-title">Keranjang Pesanan</h2>
-  <p class="muted">Periksa pesanan sebelum mengirimnya melalui WhatsApp.</p>
-  <div class="panel">
-    <div id="cart-items"><p class="muted">Keranjang masih kosong.</p></div>
-    <div class="cart-total"><span>Total</span><span id="cart-total">Rp0</span></div>
-    <button class="btn" id="checkout-button">Pesan via WhatsApp</button>
-  </div>
+<section class="section container about" id="about">
+<div class="about-image"><img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?w=900" alt="Suasana kedai kopi"></div>
+<div class="about-content"><span class="eyebrow">CERITA KAMI</span><h2>Bukan sekadar kopi,<br>tapi tempat untuk <span>kembali.</span></h2><p>Kopi P,L,M hadir untuk menemani hari kamu. Mulai dari kopi sebelum beraktivitas, makanan saat lapar, sampai obrolan panjang bersama orang-orang tersayang.</p><a href="#menu" class="text-link">Temukan favoritmu ↗</a></div>
 </section>
-
-<section id="reservasi">
-  <h2 class="section-title">Reservasi Meja</h2>
-  <p class="muted">Isi data berikut untuk mengajukan pemesanan meja.</p>
-  <div class="panel">
-    <form id="reservation-form">
-      <div class="field">
-        <label for="customer-name">Nama pemesan</label>
-        <input id="customer-name" required placeholder="Nama lengkap">
-      </div>
-      <div class="field">
-        <label for="customer-phone">Nomor telepon</label>
-        <input id="customer-phone" type="tel" required placeholder="Nomor WhatsApp">
-      </div>
-      <div class="field">
-        <label for="reservation-date">Tanggal reservasi</label>
-        <input id="reservation-date" type="date" required>
-      </div>
-      <div class="field">
-        <label for="reservation-time">Waktu reservasi</label>
-        <select id="reservation-time" required>
-          <option value="">Pilih waktu</option>
-          <option>10.00</option><option>11.00</option>
-          <option>12.00</option><option>13.00</option>
-          <option>14.00</option><option>15.00</option>
-          <option>16.00</option><option>17.00</option>
-          <option>18.00</option><option>19.00</option>
-          <option>20.00</option><option>21.00</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="guest-count">Jumlah orang</label>
-        <input id="guest-count" type="number" min="1" max="50" value="2" required>
-      </div>
-      <div class="field">
-        <label for="table-type">Pilihan meja</label>
-        <select id="table-type" required>
-          <option value="">Pilih area meja</option>
-          <option>Meja indoor</option>
-          <option>Meja outdoor</option>
-          <option>Meja dekat jendela</option>
-        </select>
-      </div>
-      <div class="field">
-        <label for="reservation-note">Catatan tambahan</label>
-        <textarea id="reservation-note" placeholder="Permintaan khusus (opsional)"></textarea>
-      </div>
-      <button class="btn" type="submit">Kirim Reservasi via WhatsApp</button>
-    </form>
-  </div>
+<section class="section menu-section" id="menu">
+<div class="container">
+<div class="section-heading"><span class="eyebrow">OUR MENU</span><h2>Ada yang bikin <span>penasaran?</span></h2><p>Pilih menu favoritmu, lalu pesan dengan mudah.</p></div>
+<div class="menu-tools">
+<input id="searchMenu" type="search" placeholder="Cari kopi, makanan, camilan...">
+<select id="sortMenu"><option value="default">Urutan awal</option><option value="low">Harga terendah</option><option value="high">Harga tertinggi</option><option value="name">Nama A-Z</option></select>
+</div>
+<div class="category-list" id="categoryList">
+<button class="category active" data-category="all">Semua</button>
+<button class="category" data-category="coffee">Coffee</button>
+<button class="category" data-category="noncoffee">Non-Coffee</button>
+<button class="category" data-category="food">Makanan</button>
+<button class="category" data-category="snack">Camilan</button>
+<button class="category" data-category="dessert">Dessert</button>
+</div>
+<div class="menu-grid" id="menuGrid"></div>
+</div>
 </section>
-
-<section>
-  <div class="two-columns">
-    <div><h2 class="section-title">Tentang JB Kuliner</h2><p>Hidangan khas Jawa dan Bali dalam satu tempat untuk dinikmati bersama keluarga dan teman.</p></div>
-    <div><h2 class="section-title">Informasi</h2><p>Jam operasional: 10.00–22.00</p><p>Pemesanan dan reservasi melalui WhatsApp.</p></div>
-  </div>
+<section class="promo"><div><span class="eyebrow">A LITTLE TREAT FOR YOU</span><h2>Punya kode voucher?</h2><p>Gunakan voucher yang tersedia saat checkout.</p></div><a href="#menu" class="btn btn-gold">Pilih Menu ↗</a></section>
+<section class="section container" id="reservation">
+<div class="section-heading"><span class="eyebrow">SAVE YOUR SEAT</span><h2>Pesan meja <span>lebih mudah.</span></h2><p>Isi detail kunjunganmu untuk mengajukan reservasi.</p></div>
+<form id="reservationForm" class="form-card">
+<div class="form-grid">
+<label>Nama lengkap<input name="name" required placeholder="Nama kamu"></label>
+<label>Nomor WhatsApp<input name="phone" required type="tel" placeholder="08xxxxxxxxxx"></label>
+<label>Tanggal<input name="date" type="date" required id="reservationDate"></label>
+<label>Waktu<input name="time" type="time" required></label>
+<label>Jumlah pengunjung<input name="guests" type="number" min="1" max="30" value="2" required></label>
+<label>Nomor meja pilihan<select name="table"><option value="">Tidak memilih</option><option>Meja 1</option><option>Meja 2</option><option>Meja 3</option><option>Meja 4</option><option>Meja 5</option></select></label>
+</div>
+<label>Catatan tambahan<textarea name="notes" rows="3" placeholder="Contoh: meja dekat jendela"></textarea></label>
+<button type="submit" class="btn btn-gold full-width">Ajukan Reservasi</button>
+<p class="form-note">Permintaan reservasi akan dikirim melalui WhatsApp untuk konfirmasi.</p>
+</form>
+</section>
+<section class="section tracking-section" id="tracking">
+<div class="container"><div class="section-heading"><span class="eyebrow">ORDER TRACKING</span><h2>Pesananmu sampai <span>mana?</span></h2><p>Masukkan kode pesanan dari perangkat ini untuk melihat status demo.</p></div>
+<form id="trackingForm" class="tracking-form"><input name="orderCode" required placeholder="Contoh: PLM-ABC123"><button type="submit" class="btn btn-gold">Lacak Pesanan</button></form>
+<div id="trackingResult" class="tracking-result"></div>
+</div>
+</section>
+<section class="section review-section" id="reviews">
+<div class="container"><div class="section-heading"><span class="eyebrow">YOUR STORY MATTERS</span><h2>Ceritakan pengalaman <span>kamu.</span></h2><p>Ulasan membantu kami menyajikan pengalaman yang lebih baik.</p></div>
+<form id="reviewForm" class="form-card">
+<label>Nama<input name="name" required placeholder="Nama kamu"></label>
+<label>Rating<select name="rating"><option value="5">★★★★★ - Sangat puas</option><option value="4">★★★★ - Puas</option><option value="3">★★★ - Cukup</option><option value="2">★★ - Kurang puas</option><option value="1">★ - Tidak puas</option></select></label>
+<label>Ulasan<textarea name="comment" rows="3" required placeholder="Ceritakan pengalamanmu..."></textarea></label>
+<button class="btn btn-gold full-width">Kirim Ulasan</button>
+</form>
+<div id="reviewsList" class="stats-grid"></div>
+</div>
+</section>
+<section class="section admin-section" id="admin">
+<div class="container"><div class="section-heading"><span class="eyebrow">MANAGEMENT</span><h2>Dashboard <span>pengelola.</span></h2><p>Dashboard demo untuk melihat pesanan yang dibuat pada perangkat ini.</p></div>
+<div class="form-card" id="adminLoginPanel"><label>Password demo admin<input id="adminPassword" type="password" placeholder="Masukkan password demo"></label><button class="btn btn-gold" id="adminLogin">Masuk Dashboard</button><p class="form-note">Password demo: plmadmin. Ini bukan sistem keamanan untuk penggunaan produksi.</p></div>
+<div class="admin-panel" id="adminPanel" hidden>
+<div class="admin-top"><h3>Ringkasan operasional</h3><button class="btn btn-outline" id="adminLogout">Keluar</button></div>
+<div class="stats-grid" id="adminStats"></div><h3>Pesanan masuk</h3><div class="admin-list" id="adminOrders"></div><h3>Reservasi</h3><div class="admin-list" id="adminReservations"></div>
+<button class="btn btn-outline" id="exportOrders">Ekspor Pesanan CSV</button>
+</div></div>
 </section>
 </main>
+<footer class="footer"><div class="footer-main">
+<div><a href="#home" class="brand" style="color:white">☕ Kopi <b>P,L,M</b></a><p>Tempat sederhana untuk kopi yang nikmat dan cerita yang hangat.</p></div>
+<div><h3>Navigasi</h3><a href="#about">Tentang kami</a><a href="#menu">Menu</a><a href="#reservation">Reservasi</a></div>
+<div><h3>Hubungi kami</h3><p>Alamat kedai dapat diatur di kode JavaScript.</p><a href="#home">Kembali ke atas ↑</a></div>
+</div><div class="footer-bottom"><span>© <span id="year"></span> Kopi P,L,M</span><a href="#admin">Admin</a></div></footer>
+<div class="overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer">
+<div class="cart-header"><h2>Keranjang 🛒</h2><button id="closeCart" class="icon-button">✕</button></div>
+<div id="cartItems" class="cart-items"></div>
+<div class="voucher-row"><input id="voucherCode" placeholder="Kode voucher"><button id="applyVoucher" class="btn btn-outline">Pakai</button></div>
+<p id="voucherMessage" class="form-note"></p>
+<div class="cart-summary"><p><span>Subtotal</span><b id="cartSubtotal">Rp0</b></p><p><span>Diskon</span><b id="cartDiscount">Rp0</b></p><p class="cart-total"><span>Total</span><b id="cartTotal">Rp0</b></p></div>
+<form id="checkoutForm">
+<label>Nama<input name="name" required placeholder="Nama pemesan"></label>
+<label>Nomor WhatsApp<input name="phone" type="tel" required placeholder="08xxxxxxxxxx"></label>
+<label>Nomor meja<input name="table" type="number" min="1" placeholder="Opsional"></label>
+<label>Catatan pesanan<textarea name="notes" rows="2" placeholder="Contoh: gula sedikit"></textarea></label>
+<button type="submit" class="btn btn-gold full-width">Buat Pesanan</button>
+</form>
+</aside>
+<div id="toast" class="toast"></div>
 
-<footer><p>© <span id="year"></span> JB Kuliner. Cita Rasa Nusantara.</p></footer>
-<div class="toast" id="toast"></div>
 
 <script>
 "use strict";
 
-const WHATSAPP_NUMBER = "62881025467022";
+/* =========================================
+   PENGATURAN KEDAI
+========================================= */
+const WHATSAPP_KEDAI = "62881025467022"; // Ganti dengan nomor WhatsApp kedai
+const ADMIN_PASSWORD = "plmadmin";
 
-const menuData = [
-{id:1,name:"Nasi Goreng Jawa",category:"Khas Jawa",type:"Makanan",price:18000,description:"Nasi goreng berbumbu dengan cita rasa gurih.",image:"https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=700&q=80"},
-{id:2,name:"Sate Ayam",category:"Khas Jawa",type:"Makanan",price:22000,description:"Sate ayam dengan bumbu kacang yang nikmat.",image:"https://images.unsplash.com/photo-1529563021893-cc83c992d75e?auto=format&fit=crop&w=700&q=80"},
-{id:3,name:"Gudeg Jogja",category:"Khas Jawa",type:"Makanan",price:20000,description:"Gudeg manis gurih dengan pelengkap tradisional.",image:"https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80"},
-{id:4,name:"Rawon",category:"Khas Jawa",type:"Makanan",price:25000,description:"Sup daging dengan kuah kluwek yang khas.",image:"https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80"},
-{id:5,name:"Soto Ayam",category:"Khas Jawa",type:"Makanan",price:18000,description:"Soto hangat dengan ayam dan rempah pilihan.",image:"https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80"},
-{id:6,name:"Bakso Kuah",category:"Khas Jawa",type:"Makanan",price:17000,description:"Bakso kenyal dalam kuah gurih yang hangat.",image:"https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=700&q=80"},
-{id:7,name:"Ayam Betutu",category:"Khas Bali",type:"Makanan",price:32000,description:"Ayam berbumbu rempah khas Pulau Dewata.",image:"https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=700&q=80"},
-{id:8,name:"Sate Lilit Bali",category:"Khas Bali",type:"Makanan",price:26000,description:"Sate lilit dengan racikan bumbu Bali.",image:"https://images.unsplash.com/photo-1529563021893-cc83c992d75e?auto=format&fit=crop&w=700&q=80"},
-{id:9,name:"Nasi Campur Bali",category:"Khas Bali",type:"Makanan",price:28000,description:"Nasi dengan aneka lauk bercita rasa Bali.",image:"https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=700&q=80"},
-{id:10,name:"Lawar Bali",category:"Khas Bali",type:"Makanan",price:24000,description:"Hidangan tradisional dengan racikan bumbu khas.",image:"https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80"},
-{id:11,name:"Tipat Cantok",category:"Khas Bali",type:"Makanan",price:16000,description:"Ketupat dan sayuran dengan saus kacang.",image:"https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=700&q=80"},
-{id:12,name:"Pisang Goreng",category:"Camilan",type:"Camilan",price:12000,description:"Pisang goreng hangat dengan tekstur renyah.",image:"https://images.unsplash.com/photo-1587132137056-bfbf0166836e?auto=format&fit=crop&w=700&q=80"},
-{id:13,name:"Klepon",category:"Camilan",type:"Camilan",price:10000,description:"Kue tradisional berisi gula merah dan kelapa.",image:"https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=700&q=80"},
-{id:14,name:"Lumpia",category:"Camilan",type:"Camilan",price:14000,description:"Lumpia renyah dengan isian gurih.",image:"https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=700&q=80"},
-{id:15,name:"Es Teh Manis",category:"Minuman",type:"Minuman",price:5000,description:"Teh manis dingin untuk menemani santapan.",image:"https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=700&q=80"},
-{id:16,name:"Es Jeruk",category:"Minuman",type:"Minuman",price:8000,description:"Minuman jeruk segar dengan rasa alami.",image:"https://images.unsplash.com/photo-1513558161293-cdaf765edfd7?auto=format&fit=crop&w=700&q=80"},
-{id:17,name:"Wedang Jahe",category:"Minuman",type:"Minuman",price:10000,description:"Minuman jahe hangat dengan aroma rempah.",image:"https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=700&q=80"},
-{id:18,name:"Es Kelapa",category:"Minuman",type:"Minuman",price:12000,description:"Kelapa muda segar yang cocok diminum siang hari.",image:"https://images.unsplash.com/photo-1525385133512-2f3bdd039054?auto=format&fit=crop&w=700&q=80"}
-];
+const $ = id => document.getElementById(id);
 
-const menuGrid=document.getElementById("menu-grid");
-const searchInput=document.getElementById("search-input");
-const categoryButtons=document.querySelectorAll(".category");
-const menuTotal=document.getElementById("menu-total");
-const cartCount=document.getElementById("cart-count");
-const cartItems=document.getElementById("cart-items");
-const cartTotal=document.getElementById("cart-total");
-const toast=document.getElementById("toast");
+const rupiah = n => new Intl.NumberFormat("id-ID", {
+  style: "currency",
+  currency: "IDR",
+  maximumFractionDigits: 0
+}).format(Number(n) || 0);
 
-let activeCategory="Semua";
-let cart={};
-let toastTimeout;
+const safe = value => String(value ?? "").replace(/[&<>"']/g, c => ({
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#39;"
+}[c]));
 
-function rupiah(amount){
- return new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(amount);
+const digits = value => String(value || "").replace(/\D/g, "");
+
+function toast(message) {
+  const el = $("toast");
+  if (!el) return;
+  el.textContent = message;
+  el.classList.add("show");
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => el.classList.remove("show"), 2600);
 }
 
-function escapeHTML(value){
- return String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[char]));
+function readData(key, fallback) {
+  try {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : fallback;
+  } catch (error) {
+    console.warn("Data lokal tidak bisa dibaca:", key, error);
+    return fallback;
+  }
 }
 
-function showToast(message){
- toast.textContent=message;
- toast.classList.add("show");
- clearTimeout(toastTimeout);
- toastTimeout=setTimeout(()=>toast.classList.remove("show"),2500);
+function saveData(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+    return true;
+  } catch (error) {
+    toast("Penyimpanan penuh atau tidak tersedia di browser.");
+    return false;
+  }
 }
 
-function renderMenu(){
- const keyword=searchInput.value.trim().toLowerCase();
- const filtered=menuData.filter(item=>{
-  const matchesCategory=activeCategory==="Semua"||item.category===activeCategory||item.type===activeCategory;
-  const matchesSearch=item.name.toLowerCase().includes(keyword)||item.description.toLowerCase().includes(keyword)||item.category.toLowerCase().includes(keyword);
-  return matchesCategory&&matchesSearch;
- });
-
- menuTotal.textContent=`${filtered.length} menu tersedia`;
-
- if(!filtered.length){
-  menuGrid.innerHTML='<div class="empty"><h3>Menu belum ditemukan 🔎</h3><p>Coba kata kunci atau kategori lain.</p></div>';
-  return;
- }
-
- menuGrid.innerHTML=filtered.map(item=>`
- <article class="menu-card">
-  <div class="menu-image-wrap">
-   <img src="${item.image}" alt="${escapeHTML(item.name)}" loading="lazy" onerror="this.style.display='none'">
-  </div>
-  <div class="menu-info">
-   <span class="category">${escapeHTML(item.category)}</span>
-   <h3>${escapeHTML(item.name)}</h3>
-   <p class="description">${escapeHTML(item.description)}</p>
-   <p class="price">${rupiah(item.price)}</p>
-   <button class="btn" data-add="${item.id}">+ Tambah ke Keranjang</button>
-  </div>
- </article>`).join("");
+function makeCode(prefix) {
+  return prefix + "-" + Math.random().toString(36).slice(2, 8).toUpperCase();
 }
 
-function getCartQuantity(){
- return Object.values(cart).reduce((sum,qty)=>sum+qty,0);
+function openWhatsApp(message) {
+  const number = digits(WHATSAPP_KEDAI);
+  if (!number) {
+    toast("Nomor WhatsApp kedai belum diatur.");
+    return;
+  }
+
+  const url = "https://wa.me/" + number + "?text=" + encodeURIComponent(message);
+  window.open(url, "_blank");
 }
 
-function getCartTotal(){
- return Object.entries(cart).reduce((sum,[id,qty])=>{
-  const item=menuData.find(menu=>menu.id===Number(id));
-  return sum+(item?item.price*qty:0);
- },0);
+/* =========================================
+   DATA MENU
+========================================= */
+const products = [
+  ["Espresso", "coffee", 18000, "Kopi pekat dengan karakter rasa kuat.", "photo-1510707577719-ae7c14805e3a"],
+  ["Americano", "coffee", 20000, "Espresso dengan air panas.", "photo-1514432324607-a09d9b4aefdd"],
+  ["Cafe Latte", "coffee", 25000, "Espresso lembut dengan steamed milk.", "photo-1461023058943-07fcbe16d735"],
+  ["Cappuccino", "coffee", 24000, "Kopi dengan foam susu lembut.", "photo-1534778101976-62847782c213"],
+  ["Es Kopi Susu Gula Aren", "coffee", 22000, "Kopi, susu, dan gula aren.", "photo-1461023058943-07fcbe16d735"],
+  ["Caramel Macchiato", "coffee", 28000, "Kopi susu dengan sentuhan karamel.", "photo-1517701604599-bb29b565090c"],
+  ["Matcha Latte", "noncoffee", 25000, "Matcha creamy dengan rasa khas.", "photo-1515823064-d6e0c04616a7"],
+  ["Chocolate Milk", "noncoffee", 22000, "Minuman cokelat dingin.", "photo-1542990253-0b8be8a7b9f5"],
+  ["Strawberry Milk", "noncoffee", 22000, "Susu segar dengan rasa stroberi.", "photo-1553787499-6f9133860278"],
+  ["Lemon Tea", "noncoffee", 15000, "Teh segar dengan sentuhan lemon.", "photo-1556679343-c7306c1976bc"],
+  ["Nasi Goreng", "food", 25000, "Nasi goreng dengan bumbu pilihan.", "photo-1512058564366-18510be2db19"],
+  ["Chicken Rice", "food", 28000, "Nasi hangat dengan ayam berbumbu.", "photo-1546069901-ba9599a7e63c"],
+  ["Mie Goreng", "food", 22000, "Mie goreng gurih dengan topping.", "photo-1569718212165-3a8278d5f624"],
+  ["Chicken Katsu", "food", 30000, "Ayam crispy dengan saus pilihan.", "photo-1562967914-608f82629710"],
+  ["French Fries", "snack", 18000, "Kentang goreng renyah.", "photo-1573080496219-bb080dd4f877"],
+  ["Pisang Goreng", "snack", 15000, "Pisang goreng hangat dan renyah.", "photo-1601050690597-df0568f70950"],
+  ["Donat Cokelat", "dessert", 16000, "Donat lembut dengan topping cokelat.", "photo-1551024506-0bccd828d307"],
+  ["Waffle", "dessert", 23000, "Waffle hangat dengan topping manis.", "photo-1562376552-0d160a2f238d"]
+].map((item, index) => ({
+  id: index + 1,
+  name: item[0],
+  category: item[1],
+  price: item[2],
+  description: item[3],
+  image: "https://images.unsplash.com/" + item[4] + "?w=700&q=80"
+}));
+
+const categoryNames = {
+  coffee: "Coffee",
+  noncoffee: "Non-Coffee",
+  food: "Makanan",
+  snack: "Camilan",
+  dessert: "Dessert"
+};
+
+/* =========================================
+   MENU: SEARCH, FILTER, SORT, RENDER
+========================================= */
+let activeCategory = "all";
+
+function renderMenu() {
+  const grid = $("menuGrid");
+  if (!grid) return;
+
+  const keyword = ($("searchMenu")?.value || "").trim().toLowerCase();
+  const sort = $("sortMenu")?.value || "default";
+
+  let list = products.filter(product => {
+    const matchesCategory =
+      activeCategory === "all" || product.category === activeCategory;
+
+    const matchesSearch =
+      product.name.toLowerCase().includes(keyword) ||
+      product.description.toLowerCase().includes(keyword) ||
+      categoryNames[product.category].toLowerCase().includes(keyword);
+
+    return matchesCategory && matchesSearch;
+  });
+
+  if (sort === "low") list.sort((a, b) => a.price - b.price);
+  if (sort === "high") list.sort((a, b) => b.price - a.price);
+  if (sort === "name") list.sort((a, b) => a.name.localeCompare(b.name, "id"));
+
+  if (!list.length) {
+    grid.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;padding:35px;background:white;border-radius:12px">
+        <h3>Menu tidak ditemukan</h3>
+        <p style="color:#897c71">Coba kata pencarian atau kategori lain.</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = list.map(product => `
+    <article class="menu-card">
+      <img
+        src="${safe(product.image)}"
+        alt="${safe(product.name)}"
+        loading="lazy"
+        onerror="this.onerror=null;this.src='https://placehold.co/600x400/f3e8d9/38251d?text=Kopi+PLM'">
+      <div class="menu-body">
+        <div class="menu-meta">
+          <span class="pill">${safe(categoryNames[product.category])}</span>
+        </div>
+        <h3>${safe(product.name)}</h3>
+        <p>${safe(product.description)}</p>
+        <div class="menu-meta">
+          <span class="price">${rupiah(product.price)}</span>
+        </div>
+        <button class="btn btn-gold" type="button" onclick="addToCart(${product.id})">
+          + Tambah ke Keranjang
+        </button>
+      </div>
+    </article>
+  `).join("");
 }
 
-function renderCart(){
- cartCount.textContent=getCartQuantity();
- cartTotal.textContent=rupiah(getCartTotal());
- const entries=Object.entries(cart).filter(([,qty])=>qty>0);
+$("searchMenu")?.addEventListener("input", renderMenu);
+$("sortMenu")?.addEventListener("change", renderMenu);
 
- if(!entries.length){
-  cartItems.innerHTML='<div class="empty"><p>🛒 Keranjangmu masih kosong.</p><p>Yuk, pilih menu favoritmu!</p></div>';
-  return;
- }
+$("categoryList")?.addEventListener("click", event => {
+  const button = event.target.closest("[data-category]");
+  if (!button) return;
 
- cartItems.innerHTML=entries.map(([id,qty])=>{
-  const item=menuData.find(menu=>menu.id===Number(id));
-  if(!item)return "";
-  return `<div class="cart-item">
-   <div><h3>${escapeHTML(item.name)}</h3><small>${rupiah(item.price*qty)}</small>
-    <div class="quantity">
-     <button data-change="-1" data-id="${item.id}">−</button>
-     <span>${qty}</span>
-     <button data-change="1" data-id="${item.id}">+</button>
-    </div>
-   </div>
-   <button class="remove-btn" data-remove="${item.id}">Hapus</button>
-  </div>`;
- }).join("");
-}
+  activeCategory = button.dataset.category;
 
-function addToCart(id){
- const item=menuData.find(menu=>menu.id===id);
- if(!item)return;
- cart[id]=(cart[id]||0)+1;
- renderCart();
- showToast(item.name+" ditambahkan ke keranjang");
-}
+  document.querySelectorAll("#categoryList .category").forEach(item => {
+    item.classList.toggle("active", item === button);
+  });
 
-function sendWhatsApp(message){
- const url="https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(message);
- window.open(url,"_blank");
-}
-
-menuGrid.addEventListener("click",event=>{
- const button=event.target.closest("[data-add]");
- if(button)addToCart(Number(button.dataset.add));
-});
-
-categoryButtons.forEach(button=>{
- button.addEventListener("click",()=>{
-  activeCategory=button.dataset.category;
-  categoryButtons.forEach(category=>category.classList.toggle("active",category===button));
   renderMenu();
- });
 });
 
-searchInput.addEventListener("input",renderMenu);
+/* =========================================
+   KERANJANG
+========================================= */
+let cart = readData("plm_cart", []);
+let appliedVoucher = "";
 
-cartItems.addEventListener("click",event=>{
- const changeButton=event.target.closest("[data-change]");
- const removeButton=event.target.closest("[data-remove]");
+const vouchers = {
+  "PLM10": 10,
+  "HEMAT5": 5
+};
 
- if(changeButton){
-  const id=Number(changeButton.dataset.id);
-  cart[id]=(cart[id]||0)+Number(changeButton.dataset.change);
-  if(cart[id]<=0)delete cart[id];
+function saveCart() {
+  saveData("plm_cart", cart);
   renderCart();
- }
- if(removeButton){
-  delete cart[Number(removeButton.dataset.remove)];
+}
+
+function addToCart(id) {
+  const product = products.find(item => item.id === Number(id));
+  if (!product) return;
+
+  const existing = cart.find(item => item.id === product.id);
+
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cart.push({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      qty: 1
+    });
+  }
+
+  saveCart();
+  toast(product.name + " ditambahkan ke keranjang.");
+}
+
+function changeQty(id, amount) {
+  const item = cart.find(product => product.id === Number(id));
+  if (!item) return;
+
+  item.qty += amount;
+  if (item.qty <= 0) {
+    cart = cart.filter(product => product.id !== Number(id));
+  }
+
+  saveCart();
+}
+
+function getSubtotal() {
+  return cart.reduce((total, item) => total + item.price * item.qty, 0);
+}
+
+function getDiscount() {
+  const percentage = vouchers[appliedVoucher] || 0;
+  return Math.round(getSubtotal() * percentage / 100);
+}
+
+function renderCart() {
+  const items = $("cartItems");
+  const count = cart.reduce((total, item) => total + item.qty, 0);
+
+  if ($("cartCount")) $("cartCount").textContent = count;
+
+  if (items) {
+    if (!cart.length) {
+      items.innerHTML = `
+        <div style="text-align:center;padding:35px 10px;color:#897c71">
+          <div style="font-size:35px">🛒</div>
+          <b>Keranjang masih kosong</b>
+          <p>Yuk, pilih menu favoritmu.</p>
+        </div>`;
+    } else {
+      items.innerHTML = cart.map(item => `
+        <div class="cart-line">
+          <div>
+            <b>${safe(item.name)}</b>
+            <small>${rupiah(item.price)} × ${item.qty}</small>
+            <b>${rupiah(item.price * item.qty)}</b>
+          </div>
+          <div class="qty">
+            <button type="button" onclick="changeQty(${item.id},-1)">−</button>
+            <b>${item.qty}</b>
+            <button type="button" onclick="changeQty(${item.id},1)">+</button>
+          </div>
+        </div>
+      `).join("");
+    }
+  }
+
+  const subtotal = getSubtotal();
+  const discount = getDiscount();
+
+  if ($("cartSubtotal")) $("cartSubtotal").textContent = rupiah(subtotal);
+  if ($("cartDiscount")) $("cartDiscount").textContent = rupiah(discount);
+  if ($("cartTotal")) $("cartTotal").textContent = rupiah(subtotal - discount);
+}
+
+function showCart() {
+  $("cartDrawer")?.classList.add("open");
+  $("cartOverlay")?.classList.add("show");
+}
+
+function hideCart() {
+  $("cartDrawer")?.classList.remove("open");
+  $("cartOverlay")?.classList.remove("show");
+}
+
+$("openCart")?.addEventListener("click", showCart);
+$("closeCart")?.addEventListener("click", hideCart);
+$("cartOverlay")?.addEventListener("click", hideCart);
+
+$("applyVoucher")?.addEventListener("click", () => {
+  const code = ($("voucherCode")?.value || "").trim().toUpperCase();
+
+  if (!code) {
+    toast("Masukkan kode voucher terlebih dahulu.");
+    return;
+  }
+
+  if (!vouchers[code]) {
+    appliedVoucher = "";
+    $("voucherMessage").textContent = "Kode voucher tidak valid.";
+    renderCart();
+    return;
+  }
+
+  appliedVoucher = code;
+  $("voucherMessage").textContent =
+    "Voucher " + code + " berhasil digunakan (" + vouchers[code] + "%).";
   renderCart();
- }
 });
 
-document.getElementById("checkout-button").addEventListener("click",()=>{
- const entries=Object.entries(cart).filter(([,qty])=>qty>0);
- if(!entries.length){showToast("Keranjang masih kosong.");return;}
+/* =========================================
+   CHECKOUT DAN DATA PESANAN
+========================================= */
+let orders = readData("plm_orders", []);
 
- const lines=entries.map(([id,qty])=>{
-  const item=menuData.find(menu=>menu.id===Number(id));
-  return `- ${item.name} x${qty}: ${rupiah(item.price*qty)}`;
- });
+$("checkoutForm")?.addEventListener("submit", event => {
+  event.preventDefault();
 
- const message=["Halo JB Kuliner, saya ingin memesan:","",...lines,"",`Total: ${rupiah(getCartTotal())}`,"","Mohon konfirmasi pesanan saya. Terima kasih."].join("\n");
- sendWhatsApp(message);
+  if (!cart.length) {
+    toast("Keranjang masih kosong.");
+    return;
+  }
+
+  const form = new FormData(event.currentTarget);
+  const name = String(form.get("name") || "").trim();
+  const phone = String(form.get("phone") || "").trim();
+
+  if (!name || !phone) {
+    toast("Lengkapi nama dan nomor WhatsApp.");
+    return;
+  }
+
+  const order = {
+    code: makeCode("PLM"),
+    name,
+    phone,
+    table: String(form.get("table") || ""),
+    notes: String(form.get("notes") || ""),
+    items: cart.map(item => ({ ...item })),
+    subtotal: getSubtotal(),
+    discount: getDiscount(),
+    total: getSubtotal() - getDiscount(),
+    status: "Menunggu konfirmasi",
+    date: new Date().toLocaleString("id-ID")
+  };
+
+  orders.unshift(order);
+
+  if (!saveData("plm_orders", orders)) return;
+
+  const itemText = order.items
+    .map(item => `${item.name} x${item.qty} = ${rupiah(item.price * item.qty)}`)
+    .join("\n");
+
+  const message = [
+    "*PESANAN KOPI P,L,M*",
+    "Kode: " + order.code,
+    "Nama: " + order.name,
+    "WhatsApp: " + order.phone,
+    "Meja: " + (order.table || "Tidak ditentukan"),
+    "",
+    "*Detail pesanan:*",
+    itemText,
+    "",
+    "Subtotal: " + rupiah(order.subtotal),
+    "Diskon: " + rupiah(order.discount),
+    "*Total: " + rupiah(order.total) + "*",
+    "Catatan: " + (order.notes || "-")
+  ].join("\n");
+
+  cart = [];
+  appliedVoucher = "";
+  saveCart();
+  event.currentTarget.reset();
+  hideCart();
+  renderAdmin();
+
+  toast("Pesanan dibuat. Kode: " + order.code);
+  openWhatsApp(message);
 });
 
-const dateInput=document.getElementById("reservation-date");
-const today=new Date();
-dateInput.min=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);
+/* =========================================
+   RESERVASI
+========================================= */
+let reservations = readData("plm_reservations", []);
 
-document.getElementById("reservation-form").addEventListener("submit",event=>{
- event.preventDefault();
+const dateInput = $("reservationDate");
+if (dateInput) {
+  const today = new Date();
+  const localDate = new Date(today.getTime() - today.getTimezoneOffset() * 60000)
+    .toISOString().split("T")[0];
+  dateInput.min = localDate;
+}
 
- const name=document.getElementById("customer-name").value.trim();
- const phone=document.getElementById("customer-phone").value.trim();
- const guests=document.getElementById("guest-count").value;
- const table=document.getElementById("table-type").value;
- const date=dateInput.value;
- const time=document.getElementById("reservation-time").value;
- const note=document.getElementById("reservation-note").value.trim();
+$("reservationForm")?.addEventListener("submit", event => {
+  event.preventDefault();
 
- if(!name||!phone||!guests||!table||!date||!time){
-  showToast("Lengkapi semua data reservasi.");
-  return;
- }
+  const form = new FormData(event.currentTarget);
 
- const message=[
-  "Halo JB Kuliner, saya ingin mengajukan reservasi meja.","",
-  `Nama: ${name}`,`Nomor telepon: ${phone}`,
-  `Jumlah orang: ${guests}`,`Pilihan meja: ${table}`,
-  `Tanggal: ${date}`,`Jam: ${time}`,`Catatan: ${note||"-"}`,"",
-  "Mohon konfirmasi ketersediaan meja. Terima kasih."
- ].join("\n");
+  const reservation = {
+    code: makeCode("RSV"),
+    name: String(form.get("name") || "").trim(),
+    phone: String(form.get("phone") || "").trim(),
+    date: String(form.get("date") || ""),
+    time: String(form.get("time") || ""),
+    guests: String(form.get("guests") || ""),
+    table: String(form.get("table") || ""),
+    notes: String(form.get("notes") || ""),
+    status: "Menunggu konfirmasi",
+    created: new Date().toLocaleString("id-ID")
+  };
 
- sendWhatsApp(message);
+  if (!reservation.name || !reservation.phone ||
+      !reservation.date || !reservation.time) {
+    toast("Lengkapi data reservasi terlebih dahulu.");
+    return;
+  }
+
+  reservations.unshift(reservation);
+
+  if (!saveData("plm_reservations", reservations)) return;
+
+  const message = [
+    "*PENGAJUAN RESERVASI KOPI P,L,M*",
+    "Kode: " + reservation.code,
+    "Nama: " + reservation.name,
+    "WhatsApp: " + reservation.phone,
+    "Tanggal: " + reservation.date,
+    "Waktu: " + reservation.time,
+    "Jumlah pengunjung: " + reservation.guests,
+    "Meja: " + (reservation.table || "Bebas"),
+    "Catatan: " + (reservation.notes || "-")
+  ].join("\n");
+
+  event.currentTarget.reset();
+  renderAdmin();
+  toast("Reservasi berhasil dicatat.");
+  openWhatsApp(message);
 });
 
-document.getElementById("year").textContent=new Date().getFullYear();
+/* =========================================
+   LACAK PESANAN
+========================================= */
+$("trackingForm")?.addEventListener("submit", event => {
+  event.preventDefault();
+
+  const form = new FormData(event.currentTarget);
+  const code = String(form.get("orderCode") || "").trim().toUpperCase();
+
+  const order = orders.find(item => item.code.toUpperCase() === code);
+  const result = $("trackingResult");
+
+  if (!result) return;
+
+  if (!order) {
+    result.innerHTML = `
+      <div class="result-box">
+        <b>Pesanan tidak ditemukan.</b>
+        <p>Periksa kembali kode pesananmu.</p>
+      </div>`;
+    return;
+  }
+
+  result.innerHTML = `
+    <div class="result-box">
+      <span class="eyebrow">STATUS PESANAN</span>
+      <h3>${safe(order.code)}</h3>
+      <p>Nama: ${safe(order.name)}</p>
+      <p>Status: <b>${safe(order.status)}</b></p>
+      <p>Total: <b>${rupiah(order.total)}</b></p>
+      <small>Pesanan tersimpan di browser perangkat ini.</small>
+    </div>`;
+});
+
+/* =========================================
+   ULASAN PELANGGAN
+========================================= */
+let reviews = readData("plm_reviews", []);
+
+function renderReviews() {
+  const list = $("reviewsList");
+  if (!list) return;
+
+  if (!reviews.length) {
+    list.innerHTML = `
+      <div class="stat" style="grid-column:1/-1;text-align:center">
+        Belum ada ulasan. Jadilah yang pertama memberikan ulasan!
+      </div>`;
+    return;
+  }
+
+  list.innerHTML = reviews.slice(0, 12).map(review => `
+    <div class="stat">
+      <strong>${"★".repeat(Number(review.rating) || 5)}</strong>
+      <b>${safe(review.name)}</b>
+      <p>${safe(review.comment)}</p>
+      <small>${safe(review.date)}</small>
+    </div>
+  `).join("");
+}
+
+$("reviewForm")?.addEventListener("submit", event => {
+  event.preventDefault();
+
+  const form = new FormData(event.currentTarget);
+
+  const review = {
+    name: String(form.get("name") || "").trim(),
+    rating: Number(form.get("rating")) || 5,
+    comment: String(form.get("comment") || "").trim(),
+    date: new Date().toLocaleDateString("id-ID")
+  };
+
+  if (!review.name || !review.comment) {
+    toast("Isi nama dan ulasan terlebih dahulu.");
+    return;
+  }
+
+  reviews.unshift(review);
+
+  if (!saveData("plm_reviews", reviews)) return;
+
+  event.currentTarget.reset();
+  renderReviews();
+  toast("Terima kasih atas ulasanmu!");
+});
+
+/* =========================================
+   DASHBOARD ADMIN
+========================================= */
+let adminLoggedIn = false;
+
+function renderAdmin() {
+  if (!adminLoggedIn) return;
+
+  const stats = $("adminStats");
+  const orderList = $("adminOrders");
+  const reservationList = $("adminReservations");
+
+  if (stats) {
+    const totalRevenue = orders.reduce((sum, order) => sum + order.total, 0);
+
+    stats.innerHTML = `
+      <div class="stat"><small>Total pesanan</small><strong>${orders.length}</strong></div>
+      <div class="stat"><small>Total reservasi</small><strong>${reservations.length}</strong></div>
+      <div class="stat"><small>Total transaksi</small><strong>${rupiah(totalRevenue)}</strong></div>`;
+  }
+
+  if (orderList) {
+    orderList.innerHTML = orders.length
+      ? orders.map((order, index) => `
+        <div class="admin-row">
+          <b>${safe(order.code)} - ${safe(order.name)}</b>
+          <p>${rupiah(order.total)} | ${safe(order.date)}</p>
+          <p>Status: <b>${safe(order.status)}</b></p>
+          <select onchange="updateOrderStatus(${index}, this.value)">
+            ${[
+              "Menunggu konfirmasi",
+              "Diproses",
+              "Siap diambil",
+              "Selesai",
+              "Dibatalkan"
+            ].map(status => `
+              <option value="${safe(status)}" ${order.status === status ? "selected" : ""}>
+                ${safe(status)}
+              </option>
+            `).join("")}
+          </select>
+        </div>
+      `).join("")
+      : "<p>Belum ada pesanan.</p>";
+  }
+
+  if (reservationList) {
+    reservationList.innerHTML = reservations.length
+      ? reservations.map((reservation, index) => `
+        <div class="admin-row">
+          <b>${safe(reservation.code)} - ${safe(reservation.name)}</b>
+          <p>${safe(reservation.date)} pukul ${safe(reservation.time)}</p>
+          <p>${safe(reservation.guests)} pengunjung | ${safe(reservation.phone)}</p>
+          <p>Status: <b>${safe(reservation.status)}</b></p>
+          <select onchange="updateReservationStatus(${index}, this.value)">
+            ${[
+              "Menunggu konfirmasi",
+              "Dikonfirmasi",
+              "Selesai",
+              "Dibatalkan"
+            ].map(status => `
+              <option value="${safe(status)}" ${reservation.status === status ? "selected" : ""}>
+                ${safe(status)}
+              </option>
+            `).join("")}
+          </select>
+        </div>
+      `).join("")
+      : "<p>Belum ada reservasi.</p>";
+  }
+}
+
+function updateOrderStatus(index, status) {
+  if (!orders[index]) return;
+  orders[index].status = status;
+  saveData("plm_orders", orders);
+  renderAdmin();
+  toast("Status pesanan diperbarui.");
+}
+
+function updateReservationStatus(index, status) {
+  if (!reservations[index]) return;
+  reservations[index].status = status;
+  saveData("plm_reservations", reservations);
+  renderAdmin();
+  toast("Status reservasi diperbarui.");
+}
+
+$("adminLogin")?.addEventListener("click", () => {
+  const password = $("adminPassword")?.value || "";
+
+  if (password !== ADMIN_PASSWORD) {
+    toast("Password admin salah.");
+    return;
+  }
+
+  adminLoggedIn = true;
+  $("adminLoginPanel").hidden = true;
+  $("adminPanel").hidden = false;
+  renderAdmin();
+  toast("Berhasil masuk dashboard.");
+});
+
+$("adminPassword")?.addEventListener("keydown", event => {
+  if (event.key === "Enter") $("adminLogin")?.click();
+});
+
+$("adminLogout")?.addEventListener("click", () => {
+  adminLoggedIn = false;
+  $("adminPanel").hidden = true;
+  $("adminLoginPanel").hidden = false;
+  if ($("adminPassword")) $("adminPassword").value = "";
+});
+
+$("exportOrders")?.addEventListener("click", () => {
+  if (!orders.length) {
+    toast("Belum ada pesanan untuk diekspor.");
+    return;
+  }
+
+  const rows = [
+    ["Kode", "Nama", "WhatsApp", "Total", "Status", "Tanggal"],
+    ...orders.map(order => [
+      order.code,
+      order.name,
+      order.phone,
+      order.total,
+      order.status,
+      order.date
+    ])
+  ];
+
+  const csv = rows.map(row =>
+    row.map(value =>
+      '"' + String(value ?? "").replace(/"/g, '""') + '"'
+    ).join(",")
+  ).join("\r\n");
+
+  const blob = new Blob(["\uFEFF" + csv], {
+    type: "text/csv;charset=utf-8;"
+  });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = "pesanan-kopi-plm.csv";
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+  toast("File CSV berhasil dibuat.");
+});
+
+/* INISIALISASI */
+if ($("year")) {
+  $("year").textContent = new Date().getFullYear();
+}
 
 renderMenu();
 renderCart();
+renderReviews();
+
 </script>
 </body>
 </html>
+
